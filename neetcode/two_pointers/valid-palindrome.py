@@ -3,24 +3,22 @@
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        
-        my_list = list(s)
-        start_index = 0
-        end_index = len(my_list) - 1
-
-        while (start_index < end_index):
-            while((start_index < end_index) and not my_list[start_index].isalnum()):
-                start_index +=1
-            while((start_index < end_index) and not my_list[end_index].isalnum()):
-                end_index -=1
-            if my_list[start_index].lower() != my_list[end_index].lower():
+        left, right = 0, len(s) - 1
+      
+        while left < right:
+            # Skip non-alphanumeric characters by moving the left pointer forward.
+            if not s[left].isalnum():
+                left += 1
+            # Skip non-alphanumeric characters by moving the right pointer backward.
+            elif not s[right].isalnum():
+                right -= 1
+            # If the characters are alphanumeric and do not match, it's not a palindrome.
+            elif s[left].lower() != s[right].lower():
                 return False
-            start_index += 1
-            end_index -= 1
+            # If characters at the current pointers match, move both pointers towards center.
+            else:
+                left += 1
+                right -= 1
+      
+        # If we haven't found any mismatches, then it's a palindrome.
         return True
-
-## Another approach
-class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        my_new_list = [val.lower() for val in s if val.isalnum()]
-        return my_new_list == my_new_list[::-1]
