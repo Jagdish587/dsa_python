@@ -1,27 +1,16 @@
+### 268. Missing Number
 
-      
-# https://leetcode.com/problems/missing-number/
-if __name__ == '__main__':
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        # step1 : compute xor of all array elements
+        xor_arr = 0
+        for val in nums:
+            xor_arr = xor_arr ^ val
 
-    nums1 = [9,6,4,2,3,5,7,0,1]
-    # missing num = 8
-    xor_array = 0
-    xor2_array = 0
-    n = len(nums1)
+        # step2 : compute xor of all numbers from 0 to n
+        xor_nums = 0
+        for val in range(0, len(nums)+1):
+            xor_nums = xor_nums ^ val
 
-    # xor all array elements
-    for i in range(n):
-        xor_array = xor_array ^ nums1[i]
-
-    for i in range(0, n+1):
-        xor2_array = xor2_array ^ i
-     
-
-    print("xor_array = ", xor_array)
-    print("xor2_array2 = ", xor2_array)
-
-    result = xor_array ^ xor2_array
-    print("result = ", result)
-
-
-
+        result = xor_arr ^ xor_nums
+        return result
